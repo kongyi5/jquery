@@ -1,1 +1,1 @@
-{"version":3,"sources":["src/main.js"],"names":["x","jQuery","children","print"],"mappings":"AAAA,IAAMA,CAAC,GAAGC,MAAM,CAAC,OAAD,CAAhB;AACAD,CAAC,CAACE,QAAF,GAAaC,KAAb","file":"main.1e43358e.js","sourceRoot":"..","sourcesContent":["const x = jQuery(\".test\");\r\nx.children().print();\r\n"]}
+{"version":3,"sources":[],"names":[],"mappings":"","file":"main.1e43358e.js","sourceRoot":"..","sourcesContent":[]}

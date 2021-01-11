@@ -130,7 +130,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-window.jQuery = function (selectorOrArray) {
+window.$ = window.jQuery = function (selectorOrArray) {
   var elements;
 
   if (typeof selectorOrArray === "string") {
@@ -139,57 +139,71 @@ window.jQuery = function (selectorOrArray) {
     elements = selectorOrArray;
   }
 
-  return {
-    find: function find(selector) {
-      var array = [];
+  var api = Object.create(jQuery.prototype); // const api = {__proto__: jQuery.prototype}
 
-      for (var i = 0; i < elements.length; i++) {
-        array = array.concat(Array.from(elements[i].querySelectorAll(selector)));
-      }
-
-      array.oldApi = this;
-      return jQuery(array);
-    },
-    parent: function parent() {
-      var array = [];
-      this.each(function (node) {
-        if (array.indexOf(node.parentNode) === -1) {
-          array.push(node.parentNode);
-        }
-      });
-      return jQuery(array);
-    },
-    children: function children() {
-      var array = [];
-      this.each(function (node) {
-        array.push.apply(array, _toConsumableArray(node.children));
-      });
-      return jQuery(array);
-    },
-    print: function print() {
-      console.log(elements);
-    },
-    each: function each(fn) {
-      for (var i = 0; i < elements.length; i++) {
-        fn.call(null, elements[i], i);
-      }
-
-      return this;
-    },
-    addClass: function addClass(className) {
-      for (var i = 0; i < elements.length; i++) {
-        elements[i].classList.add(className);
-      }
-
-      return this;
-    },
-    oldApi: selectorOrArray.oldApi,
-    end: function end() {
-      return this.oldApi;
-    }
-  };
+  Object.assign(api, {
+    // api.elements = elements;
+    // api.oldApi = selectorOrArray.oldApi;
+    elements: elements,
+    oldApi: selectorOrArray.oldApi
+  });
+  return api;
 };
-},{}],"../../AppData/Roaming/npm-cache/_npx/13572/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+
+jQuery.fn = jQuery.prototype = {
+  constructor: jQuery,
+  jquery: true,
+  get: function get(index) {
+    return elements[index];
+  },
+  find: function find(selector) {
+    var array = [];
+
+    for (var i = 0; i < elements.length; i++) {
+      array = array.concat(Array.from(elements[i].querySelectorAll(selector)));
+    }
+
+    array.oldApi = this;
+    return jQuery(array);
+  },
+  parent: function parent() {
+    var array = [];
+    this.each(function (node) {
+      if (array.indexOf(node.parentNode) === -1) {
+        array.push(node.parentNode);
+      }
+    });
+    return jQuery(array);
+  },
+  children: function children() {
+    var array = [];
+    this.each(function (node) {
+      array.push.apply(array, _toConsumableArray(node.children));
+    });
+    return jQuery(array);
+  },
+  print: function print() {
+    console.log(elements);
+  },
+  each: function each(fn) {
+    for (var i = 0; i < elements.length; i++) {
+      fn.call(null, elements[i], i);
+    }
+
+    return this;
+  },
+  addClass: function addClass(className) {
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].classList.add(className);
+    }
+
+    return this;
+  },
+  end: function end() {
+    return this.oldApi;
+  }
+};
+},{}],"../../AppData/Roaming/npm-cache/_npx/7380/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -217,7 +231,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62438" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63213" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -393,5 +407,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../AppData/Roaming/npm-cache/_npx/13572/node_modules/parcel/src/builtins/hmr-runtime.js","src/jquery.js"], null)
+},{}]},{},["../../AppData/Roaming/npm-cache/_npx/7380/node_modules/parcel/src/builtins/hmr-runtime.js","src/jquery.js"], null)
 //# sourceMappingURL=/jquery.6e1b786a.js.map
